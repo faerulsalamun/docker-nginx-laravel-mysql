@@ -1,6 +1,6 @@
 # Docker Nginx, Laravel, MySQL
 
-## Installation
+## How To Use
 ```
 1. Run docker network create web-proxy
 2. Change your timezone in file web > Dockerfile line 10
@@ -9,6 +9,6 @@
 5. Run docker-compose up -d
 6. Run docker-compose exec web composer install
 7. Run docker-compose exec web php artisan key:generate
-8. Need migrate data ? Setting your .env in folder web > www and then docker-compose exec web php artisan migrate 
+8. Need migrate data ? Setting your .env in folder web > www and then run docker-compose exec web php artisan migrate 
 9. Happy coding :)
 ```
