@@ -1,0 +1,54 @@
+version: '3'
+
+services:
+  nginx:
+    build: ./nginx
+    container_name: nginx
+    restart: always
+    ports:
+      - "80:80"
+    volumes:
+     - ./web/www:/var/www
+    networks:
+      - default
+
+  web:
+    build: ./web
+    container_name: web
+    restart: always
+    depends_on:  
+      - mysql
+    expose:
+      - 9000
+    volumes:
+      - ./web/www:/var/www
+    networks:
+      - default
+      - mysql
+
+  mysql:
+     image: mysql:5.7
+     container_name: mysql
+     volumes:
+       - db:/var/lib/mysql
+     restart: always
+     expose:
+      - 3306
+     environment:
+       MYSQL_ROOT_PASSWORD: fivecodedevelopment
+       MYSQL_USER: fivecodedevelopment
+       MYSQL_PASSWORD: fivecodedevelopment
+     networks:
+      - mysql
+
+volumes:
+ db:
+
+networks:
+  default:
+    external:
+      name: web-proxy
+  mysql:
+    driver: bridge   
+
+
